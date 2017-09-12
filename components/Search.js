@@ -6,7 +6,7 @@ import { HOST } from '../constants';
 
 export default class Search extends React.Component {
   static navigationOptions = {
-    tabBarLabel: 'Search'
+    title: 'Search'
   };
 
   state = {
@@ -24,7 +24,7 @@ export default class Search extends React.Component {
             url = decodeURIComponent(url.slice(7));
           }
           return {
-            id: book._id, title: book.title, image: url
+            bookID: book._id, title: book.title, image: url, lastChapter: book.lastChapter
           }
         });
         this.setState({data});
@@ -33,7 +33,6 @@ export default class Search extends React.Component {
 
   render() {
     const data = this.state.data;
-    console.log(data);
     return (
       <View style={{flex: 1, paddingTop: 100}}>
         <Text>Search</Text>
@@ -44,7 +43,7 @@ export default class Search extends React.Component {
           style={{ height: 100 }}
         />
 
-        <BookList data={data} />
+        <BookList data={data} navigation={this.props.navigation} />
       </View>
     )
   }

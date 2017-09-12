@@ -1,12 +1,13 @@
 import React from 'react';
-import { StyleSheet, Text, View, FlatList, TextInput, Image } from 'react-native';
+import { View, Button } from 'react-native';
 
 import BookList from './BookList';
 import db from '../storage';
 
 export default class BookShelf extends React.Component {
   static navigationOptions = {
-    tabBarLabel: 'BookShelf'
+    // tabBarLabel: 'BookShelf'
+    title: 'BookShelf'
   };
 
   state = {
@@ -16,15 +17,18 @@ export default class BookShelf extends React.Component {
   componentDidMount() {
     db.transaction(tx => {
       tx.executeSql('select * from books;', [], (_, { rows }) => {
+        console.log(rows);
         this.setState({ data: rows._array });
       });
     });
   }
 
   render() {
+    const {navigate} = this.props.navigation;
     return (
       <View style={{ flex: 1, paddingTop: 100 }}>
-        <BookList data={this.state.data} />
+        <Button title="search" onPress={() => {navigate('Search')}} />
+        <BookList data={this.state.data} navigation={this.props.navigation} />
       </View>
     )
   }
