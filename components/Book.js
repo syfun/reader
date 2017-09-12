@@ -1,9 +1,11 @@
 import React from 'react';
-import { Text, View, Image } from 'react-native';
+import { Text, View, Image, Button } from 'react-native';
 
-const Book = ({ title }) => (
+import db from '../storage';
+
+const Book = ({ title, image }) => (
   <View style={{ flex: 1, flexDirection: 'row' }}>
-    <Image source={{ uri: 'http://img1.write.qq.com/upload/cover/2016-10-12/cb_57fdcffbddd59.jpg' }}
+    <Image source={{ uri: image }}
       style={{ width: 45, height: 60 }} />
     <Text>{title}</Text>
   </View>
