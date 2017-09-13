@@ -26,20 +26,21 @@ export default class BookDetail extends React.Component {
     const url = `${HOST}/mix-toc/${book._id}`;
     fetch(url).then(resp => resp.json())
       .then(resp => {
-        let first = resp.mixToc.chapters[0];
-        navigate('Content', {link: first.link, title: first.title});
+        const current = {index: 0, ...resp.mixToc.chapters[0]};
+        const next = {index: 1, ...resp.mixToc.chapters[1]};
+        navigate('Content', {current, next, book});
       })
   }
 
   addToShelf = () => {
     const book = this.state.book;
-    let url = book.cover;
-    if (url.startsWith('/agent/')) {
-      url = decodeURIComponent(url.slice(7));
+    let image = book.cover;
+    if (image.startsWith('/agent/')) {
+      image = decodeURIComponent(image.slice(7));
     }
     db.transaction(tx => {
       tx.executeSql('insert into books (bookID, title, image, lastChapter) values (?, ?, ?, ?)',
-      [book._id, book.title, url, book.lastChapter]);
+      [book._id, book.title, image, book.lastChapter]);
     })
   }
 
