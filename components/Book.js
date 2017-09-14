@@ -26,7 +26,7 @@ render() {
   return (
     <View style={{ flex: 1, flexDirection: 'row' }}>
       <TouchableOpacity style={{ flex: 1, flexDirection: 'row' }}
-        onPress={() => { navigation.navigate('Detail', { bookID: book.bookID }); }}>
+        onPress={() => { navigation.navigate('Detail', { book }); }}>
         <Image source={{ uri: book.image }}
           style={{ width: 45, height: 60 }} />
         <View style={{ flex: 1 }}>

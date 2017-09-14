@@ -6,7 +6,7 @@ import ChapterLink from './ChapterLink';
 export default class Content extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: navigation.state.params.current.title
+      title: navigation.state.params.chapter.title
     }
   };
 
@@ -15,8 +15,8 @@ export default class Content extends React.Component {
   }
 
   componentDidMount() {
-    const { current } = this.props.navigation.state.params;
-    const link = encodeURIComponent(current.link);
+    const { chapter } = this.props.navigation.state.params;
+    const link = encodeURIComponent(chapter.link);
     const url = `http://chapter2.zhuishushenqi.com/chapter/${link}?k=2124b73d7e2e1945&t=1468223717`;
     fetch(url).then(resp => resp.json())
       .then(resp => {
@@ -24,15 +24,19 @@ export default class Content extends React.Component {
       });
   }
 
+  gotoPrefix = () => {
+
+  }
+
   render() {
     const body = this.state.body;
-    const { navigation } = this.props;
-    const { prefix, next, book } = this.props.navigation.state.params;
+    // const { navigation } = this.props;
+    // const { prefix, next, book } = navigation.state.params;
     return (
       <View>
-        <ChapterLink name="前一章" book={book} chapter={prefix} navigation={navigation} />
-        <ChapterLink name="后一章" book={book} chapter={next} navigation={navigation} />
-        <ScrollView>
+        <Button title="Preifx" />
+        <Button title="Next" />
+        <ScrollView pagingEnabled={true}>
           <Text style={styles.body}>{body}</Text>
         </ScrollView>
       </View>
