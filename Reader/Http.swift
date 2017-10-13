@@ -6,13 +6,11 @@
 //  Copyright © 2017年 ysun. All rights reserved.
 //
 //
-//import Alamofire
-//
-//func searchBook(_ name: String) {
-//    let parameters: Parameters = ["query": name, "start": 0, "limit": 2]
-//    Alamofire.request("http://api.zhuishushenqi.com/book/fuzzy-search", parameters: parameters).responseJSON { response in
-//        print("Request: \(String(describing: response.request))")
-//        print("Result: \(response.result)")
-//    }
-//}
+import Alamofire
 
+func searchBook(_ name: String, handler: @escaping (DataResponse<Any>) -> Void) {
+    let parameters: Parameters = ["query": name, "start": 0, "limit": 5]
+    Alamofire.request("http://api.zhuishushenqi.com/book/fuzzy-search", parameters: parameters).responseJSON { response in
+        handler(response)
+    }
+}
