@@ -11,9 +11,7 @@ import UIKit
 class BookSearchTableViewCell: UITableViewCell {
     //MARK: Properties
     
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var authorLabel: UILabel!
-    @IBOutlet weak var shortIntroLabel: UILabel!
+    @IBOutlet weak var bookItem: BookItem!
     
     override func awakeFromNib() {
         super.awakeFromNib()

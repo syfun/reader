@@ -38,9 +38,8 @@ class SearchViewController: UIViewController,UITextFieldDelegate, UITableViewDel
         let cell = tableView.dequeueReusableCell(withIdentifier: "SearchTableViewCell", for: indexPath) as! BookSearchTableViewCell
         
         let book = books[indexPath.row]
-        cell.titleLabel.text = book.title
-        cell.authorLabel.text = book.author
-        cell.shortIntroLabel.text = book.shortIntro
+        cell.bookItem.title = book.title
+        cell.bookItem.author = book.author
         return cell
     }
     
